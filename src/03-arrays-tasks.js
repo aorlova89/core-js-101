@@ -102,7 +102,7 @@ function getArrayOfStrings(arr) {
  */
 function removeFalsyValues(arr) {
   const falsyValues = [false, null, 0, '', undefined, NaN];
-  return arr.filter((e) => falsyValues.indexOf(e) < 0);
+  return arr.filter((e) => !Number.isNaN(e) && falsyValues.indexOf(e) < 0);
 }
 
 /**
@@ -456,8 +456,14 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const res = [start];
+  let iterator = start + 1;
+  while (iterator <= end) {
+    res.push(iterator);
+    iterator += 1;
+  }
+  return res;
 }
 
 /**
