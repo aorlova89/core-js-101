@@ -52,8 +52,11 @@ function getFizzBuzz(num) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let res;
+  if (n <= 1) res = 1;
+  else res = n * getFactorial(n - 1);
+  return res;
 }
 
 
@@ -163,8 +166,9 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  return Math.sqrt((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2)
+    < circle.radius;
 }
 
 
@@ -179,8 +183,21 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const strArr = str.split('');
+  const m = {};
+  for (let i = 0; i < strArr.length; i += 1) {
+    if (m[strArr[i]]) {
+      m[strArr[i]] += 1;
+    } else {
+      m[strArr[i]] = 1;
+    }
+  }
+  const res = Object.keys(m).find((key) => m[key] === 1);
+  if (res) {
+    return res;
+  }
+  return null;
 }
 
 
@@ -206,8 +223,18 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let res = '';
+  if (isStartIncluded) res = '[';
+  else res = '(';
+  if (a < b) {
+    res += `${a}, ${b}`;
+  } else {
+    res += `${b}, ${a}`;
+  }
+  if (isEndIncluded) res += ']';
+  else res += ')';
+  return res;
 }
 
 
@@ -275,8 +302,31 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
+function isCreditCardNumber(/* cnn */) {
+  // 1. Цифры проверяемой последовательности нумеруются справа налево.
+  // 2. Цифры, оказавшиеся на нечётных местах, остаются без изменений.
+  // 3. Цифры, стоящие на чётных местах, умножаются на 2.
+  // 4. Если в результате такого умножения возникает число больше 9, оно заменяется
+  // суммой цифр получившегося произведения — однозначным числом, то есть цифрой.
+  // 5. Все полученные в результате преобразования цифры складываются. Если сумма кратна 10,
+  // то исходные данные верны.
   throw new Error('Not implemented');
+  // let nCheck = 0;
+  // let bEven = false;
+  // const val = cnn.toString();
+  //
+  // for (let n = val.length - 1; n >= 0; n -= 1) {
+  //   let nDigit = parseInt(val.charAt(n), 10);
+  //   nDigit *= 2;
+  //   if (bEven && nDigit > 9) {
+  //     nDigit -= 9;
+  //   }
+  //
+  //   nCheck += nDigit;
+  //   bEven = !bEven;
+  // }
+  //
+  // return (nCheck % 10) === 0;
 }
 
 /**
@@ -293,8 +343,13 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const digits = String(num).split('').map((n) => Number(n));
+  let sumOfDigits = digits.reduce((a, b) => a + b, 0);
+  if (sumOfDigits > 10) {
+    sumOfDigits = getDigitalRoot(sumOfDigits);
+  }
+  return sumOfDigits;
 }
 
 
@@ -384,8 +439,21 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const aNumRows = m1.length;
+  const aNumCols = m1[0].length;
+  const bNumCols = m2[0].length;
+  const m = new Array(aNumRows);
+  for (let r = 0; r < aNumRows; r += 1) {
+    m[r] = new Array(bNumCols);
+    for (let c = 0; c < bNumCols; c += 1) {
+      m[r][c] = 0;
+      for (let i = 0; i < aNumCols; i += 1) {
+        m[r][c] += m1[r][i] * m2[i][c];
+      }
+    }
+  }
+  return m;
 }
 
 

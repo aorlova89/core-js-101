@@ -50,11 +50,12 @@ function getCircleCircumference(radius) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(value1, value2) {
-  if (value1 + value2 === 0) {
-    return 0;
-  }
-  return ((value1 + value2)) / 2;
+function getAverage(/* value1, value2 */) {
+  throw new Error('Not implemented');
+  // if (value1 + value2 === 0) {
+  //   return 0;
+  // }
+  // return ((value1 + value2)) / 2;
 }
 
 /**
@@ -184,6 +185,10 @@ function getParallelepipedDiagonal(a, b, c) {
  */
 function roundToPowerOfTen(/* num, pow */) {
   throw new Error('Not implemented');
+  // if (pow === 0) {
+  //   return num;
+  // }
+  // return 0;
 }
 
 /**
@@ -191,7 +196,7 @@ function roundToPowerOfTen(/* num, pow */) {
  * See: https://en.wikipedia.org/wiki/Primality_test
  *
  * @param {number} n
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   4 => false
@@ -203,8 +208,14 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n === 2) return true;
+  if (n < 2 || n % 2 === 0) return false;
+  const sqrt = Math.sqrt(n);
+  for (let i = 3; i <= sqrt; i += 2) {
+    if (n % i === 0) return false;
+  }
+  return true;
 }
 
 /**
