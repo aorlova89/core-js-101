@@ -228,6 +228,21 @@ function getRectangleString(/* width, height */) {
  *
  */
 function encodeToRot13(/* str */) {
+  // const cipherKey = {
+  //   a: 'n', b: 'o', c: 'p', d: 'q', e: 'r', f: 's', g: 't', h: 'u', i: 'v', j: 'w',
+  //   k: 'x', l: 'y', m: 'z', A: 'N', B: 'O', C: 'P', D: 'Q', E: 'R', F: 'S', G: 'T',
+  //   H: 'U', I: 'V', J: 'W', K: 'X', L: 'Y', M: 'Z',
+  // };
+  // const res = str.split('').map((letter) => {
+  //
+  // });
+  // a b c d e f g h i j k l m
+  // n o p q r s t u v w x y z
+  // if (letter.toUpperCase() === letter) {
+  //   console.log('✅ letter is uppercase');
+  // } else {
+  //   console.log('⛔️ letter is lowercase');
+  // }
   throw new Error('Not implemented');
 }
 
@@ -276,8 +291,12 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return cards.findIndex((e) => e === value);
 }
 
 
