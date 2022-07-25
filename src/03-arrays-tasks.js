@@ -200,8 +200,8 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.map((array) => `${array.join(',')}\n`).join('').slice(0, -1);
 }
 
 /**
@@ -234,9 +234,10 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  return arr.map((el, index) => arr.slice(0, index + 1).reduce((a, b) => a + b, 0));
 }
+
 
 /**
  * Returns every second item from the specified array:
@@ -268,18 +269,8 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-  // if (arr.length === 1) {
-  //   return arr;
-  // }
-  // return arr.map((x, i) => {
-  //   const n = [...Array(i + 1)];
-  //   if (arr.length > 0) {
-  //     n.map(() => x);
-  //   }
-  //   return [...n];
-  // });
+function propagateItemsByPositionIndex(arr) {
+  return arr.reduce((acc, curr, index) => acc.concat([...Array(index + 1)].fill(curr)), []);
 }
 
 
@@ -454,8 +445,17 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({
+    length: n,
+  }, (_, i) => Array.from({
+    length: n,
+  }, (el, j) => {
+    if (i !== j) {
+      return 0;
+    }
+    return 1;
+  }));
 }
 
 /**
@@ -563,6 +563,7 @@ function getElementByIndexes(/* arr, indexes */) {
   // }
   // return res;
   throw new Error('Not implemented');
+  // return indexes.reduce((acc, curr, index) => arr[curr[index]], arr);
 }
 
 
